@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.example","l":"DataStreamHandle"},{"p":"org.example","l":"DrawChart"},{"p":"org.example","l":"DataStreamHandle.Interval"},{"p":"org.example","l":"Main"},{"p":"org.example","l":"MedianSelection"},{"p":"org.example","l":"DataStreamHandle.OutputSize"}];updateSearchResults();

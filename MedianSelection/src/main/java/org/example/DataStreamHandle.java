@@ -18,8 +18,8 @@ import java.util.Map;
 
 /**
  * DataStreamHandle class is responsible for requesting data from the Alpha Vantage API,
- * process the data, call the Median Selection class to obtain the relevant median,
- * and then process the data into the format required by JFreeChart.
+ * processing the data, calling the Median Selection class to obtain the relevant median,
+ * and then processing the data into the format required by JFreeChart.
  */
 public class DataStreamHandle {
 

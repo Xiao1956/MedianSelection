@@ -1,33 +1,31 @@
 package org.example;
 
 import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Queue;
 
 /**
  * Compute the median of a stream of Double
  */
-public class MedianSelection {
+public class MedianSelection{
 
     /**
      * Declare minHeap, maxHeap
      */
-    private Queue<Double> minHeap, maxHeap;
+    private HeapPriorityQueue minHeap, maxHeap;
 
     /**
      * Constructor for MedianSelection class
      * Construct a new MedianSelection object with an empty min heap and max heap.
      */
     public MedianSelection() {
-        minHeap = new PriorityQueue<Double>();
-        maxHeap = new PriorityQueue<Double>(Comparator.reverseOrder());
+        minHeap = new HeapPriorityQueue();
+        maxHeap = new HeapPriorityQueue(Comparator.reverseOrder());
     }
 
     /**
      * Return the minimum heap containing the values
      * @return the minimum heap
      */
-    public Queue<Double> getMinHeap() {
+    public HeapPriorityQueue getMinHeap() {
         return minHeap;
     }
 
@@ -35,7 +33,7 @@ public class MedianSelection {
      * Returns the maximum heap containing the values
      * @return the maximum heap
      */
-    public Queue<Double> getMaxHeap() {
+    public HeapPriorityQueue getMaxHeap() {
         return maxHeap;
     }
 
@@ -46,9 +44,9 @@ public class MedianSelection {
     public void add(double num) {
         // If the value of the element is less than or equal to the top element of the max heap, put it in the max heap
         if (!minHeap.isEmpty() && num < minHeap.peek()) {
-            maxHeap.offer(num);
+            maxHeap.add(num);
         } else { //If the value of the element is greater than the top element of the max heap, put it in the min heap
-            minHeap.offer(num);
+            minHeap.add(num);
         }
         balance();
     }
@@ -60,11 +58,11 @@ public class MedianSelection {
         // Check the number of elements in the max heap and min heap, and if the difference between their number of elements is greater than 1, balancing operation is needed
         while (maxHeap.size() > minHeap.size() + 1) {
             // Move the root element of the max heap to the min heap
-            minHeap.offer(maxHeap.poll());
+            minHeap.add(maxHeap.remove());
         }
         while (minHeap.size() > maxHeap.size() + 1) {
             // Move the root element of the min heap to the max heap
-            maxHeap.offer(minHeap.poll());
+            maxHeap.add(minHeap.remove());
         }
     }
 
@@ -79,7 +77,7 @@ public class MedianSelection {
         } else if (minHeap.size() > maxHeap.size()) {
             median = minHeap.peek();
         } else {
-            median = (maxHeap.peek() + minHeap.peek()) / 2.0;
+            median = (maxHeap.peek() + minHeap.peek()) / 2;
         }
         return median;
     }

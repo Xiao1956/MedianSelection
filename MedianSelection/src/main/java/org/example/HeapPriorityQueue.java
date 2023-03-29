@@ -41,7 +41,7 @@ public class HeapPriorityQueue{
      **/
     public void add(double num) {
         data.add(num);
-        upheapify(data.size() - 1);
+        upHeapify(data.size() - 1);
     }
 
     /**
@@ -54,7 +54,7 @@ public class HeapPriorityQueue{
         }
         swap(0, data.size() - 1);
         double tmp = data.remove(data.size() - 1);
-        downheapify(0);
+        downHeapify(0);
         return tmp;
     }
 
@@ -62,12 +62,12 @@ public class HeapPriorityQueue{
      * Compare element at the given index with its parent and swaps them, till the heap is balanced
      * @param i the index of target element
      **/
-    private void upheapify(int i) {
+    private void upHeapify(int i) {
         if (i == 0) return;
         int parent = (i - 1) / 2;
         if (compare(data.get(i), data.get(parent)) < 0) {
             swap(i, parent);
-            upheapify(parent);
+            upHeapify(parent);
         }
     }
 
@@ -75,7 +75,7 @@ public class HeapPriorityQueue{
      * Compare element at the given index with its children and swaps them, till the heap is balanced.
      * @param i the index of the target element
      **/
-    private void downheapify(int i) {
+    private void downHeapify(int i) {
         int target  = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
@@ -87,7 +87,7 @@ public class HeapPriorityQueue{
         }
         if (target != i) {
             swap(target, i);
-            downheapify(i);
+            downHeapify(i);
         }
     }
 

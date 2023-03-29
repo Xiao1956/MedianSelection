@@ -40,6 +40,9 @@ class MedianSelectionTest {
         dataStreamHandle = new DataStreamHandle(apiKey, symbolName, DataStreamHandle.Interval.SIXTY_MIN, DataStreamHandle.OutputSize.COMPACT);
     }
 
+    /**
+     * Test add() method of HeapPriorityQueue by adding elements and checking the size of the priority queue
+     */
     @Test
     public void testAddForPriorityQueue() {
         HeapPriorityQueue heapPriorityQueue = new HeapPriorityQueue();
@@ -49,6 +52,9 @@ class MedianSelectionTest {
         assertEquals(2, heapPriorityQueue.size());
     }
 
+    /**
+     * Test add() method of HeapPriorityQueue by adding elements and checking the size of the priority queue
+     */
     @Test
     public void testRemoveForPriorityQueue() {
         HeapPriorityQueue heapPriorityQueue = new HeapPriorityQueue();
@@ -59,6 +65,9 @@ class MedianSelectionTest {
         assertEquals(1, heapPriorityQueue.size());
     }
 
+    /**
+     * Test the remove() method of HeapPriorityQueue by adding elements to the queue, removing an element, and checking the size of the queue
+     */
     @Test
     public void testIsEmptyForPriorityQueue() {
         HeapPriorityQueue heapPriorityQueue = new HeapPriorityQueue();
@@ -68,6 +77,9 @@ class MedianSelectionTest {
         assertTrue(heapPriorityQueue.isEmpty());
     }
 
+    /**
+     * Tests the isEmpty() method of HeapPriorityQueue by adding and removing an element and checking whether the queue is empty
+     */
     @Test
     public void testPriorityQueueCase1() {
         HeapPriorityQueue heapPriorityQueue = new HeapPriorityQueue();
@@ -80,6 +92,11 @@ class MedianSelectionTest {
         assertEquals(8, heapPriorityQueue.peek());
     }
 
+    /**
+     * Test HeapPriorityQueue with an ascending comparator by adding elements to the queue,
+     * peeking the minimum element, removing the minimum element,
+     * and peeking again to verify that the minimum element has been removed
+     */
     @Test
     public void testPriorityQueueCase2() {
         HeapPriorityQueue heapPriorityQueue = new HeapPriorityQueue(Comparator.reverseOrder());
@@ -92,6 +109,9 @@ class MedianSelectionTest {
         assertEquals(10, heapPriorityQueue.peek());
     }
 
+    /**
+     * Test HeapPriorityQueue by adding a Double.NaN value and checking if it was added successfully
+     */
     @Test
     public void testPriorityQueueCase3() {
         HeapPriorityQueue heapPriorityQueue1 = new HeapPriorityQueue();
@@ -101,7 +121,7 @@ class MedianSelectionTest {
 
     /**
      * Test the add() and balance() methods of the MedianSelection class by adding elements and checking the size of the
-     * min and max heaps.
+     * min and max heaps
      */
     @Test
     public void testAddAndBalanceForMedianSelection() {
@@ -116,7 +136,7 @@ class MedianSelectionTest {
     }
 
     /**
-     * Test the getMedian() method of the MedianSelection class by adding elements and checking the returned median value.
+     * Test the getMedian() method of the MedianSelection class by adding elements and checking the returned median value
      */
     @Test
     public void testGetMedianCase1() {
@@ -144,7 +164,7 @@ class MedianSelectionTest {
     }
 
     /**
-     * Test the getMedian() method of the MedianSelection class with NaN value and checks if the result is NaN.
+     * Test the getMedian() method of the MedianSelection class with NaN value and checks if the result is NaN
      */
     @Test
     public void testGetMedianCase2() {
@@ -154,7 +174,7 @@ class MedianSelectionTest {
     }
 
     /**
-     * Test the getUrl() method of the DataStreamHandle class by checking if the constructed url is correct.
+     * Test the getUrl() method of the DataStreamHandle class by checking if the constructed url is correct
      */
     @Test
     void testGetUrl() {
@@ -165,7 +185,7 @@ class MedianSelectionTest {
     }
 
     /**
-     * Test the getRequestData() method of the DataStreamHandle class by checking if the result is not null and has the desired data.
+     * Test the getRequestData() method of the DataStreamHandle class by checking if the result is not null and has the desired data
      */
     @Test
     void testGetRequestDate() throws IOException {
@@ -178,7 +198,7 @@ class MedianSelectionTest {
     }
 
     /**
-     * Test transformData() method of the DataStreamHandle class by checking the data stream by whether the data has been transformed into a map.
+     * Test transformData() method of the DataStreamHandle class by checking the data stream by whether the data has been transformed into a map
      * @throws IOException if there is an error connecting to the URL or reading the response
      */
     @Test
@@ -225,7 +245,7 @@ class MedianSelectionTest {
     }
 
     /**
-     * Test whether a DrawChart object can be initialized with null data.
+     * Test whether a DrawChart object can be initialized with null data
      */
     @Test
     void testNullDataForChart() {

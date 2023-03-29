@@ -1,5 +1,6 @@
 import org.example.DataStreamHandle;
 import org.example.DrawChart;
+import org.example.HeapPriorityQueue;
 import org.example.MedianSelection;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,10 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -42,12 +40,71 @@ class MedianSelectionTest {
         dataStreamHandle = new DataStreamHandle(apiKey, symbolName, DataStreamHandle.Interval.SIXTY_MIN, DataStreamHandle.OutputSize.COMPACT);
     }
 
+    @Test
+    public void testAddForPriorityQueue() {
+        HeapPriorityQueue heapPriorityQueue = new HeapPriorityQueue();
+        heapPriorityQueue.add(5.0);
+        assertEquals(1, heapPriorityQueue.size());
+        heapPriorityQueue.add(10.0);
+        assertEquals(2, heapPriorityQueue.size());
+    }
+
+    @Test
+    public void testRemoveForPriorityQueue() {
+        HeapPriorityQueue heapPriorityQueue = new HeapPriorityQueue();
+        heapPriorityQueue.add(5.0);
+        heapPriorityQueue.add(10.0);
+        assertEquals(2, heapPriorityQueue.size());
+        heapPriorityQueue.remove();
+        assertEquals(1, heapPriorityQueue.size());
+    }
+
+    @Test
+    public void testIsEmptyForPriorityQueue() {
+        HeapPriorityQueue heapPriorityQueue = new HeapPriorityQueue();
+        heapPriorityQueue.add(5.0);
+        assertFalse(heapPriorityQueue.isEmpty());
+        heapPriorityQueue.remove();
+        assertTrue(heapPriorityQueue.isEmpty());
+    }
+
+    @Test
+    public void testPriorityQueueCase1() {
+        HeapPriorityQueue heapPriorityQueue = new HeapPriorityQueue();
+        heapPriorityQueue.add(15.0);
+        heapPriorityQueue.add(5.0);
+        heapPriorityQueue.add(8.0);
+        heapPriorityQueue.add(10.0);
+        assertEquals(5, heapPriorityQueue.peek());
+        heapPriorityQueue.remove();
+        assertEquals(8, heapPriorityQueue.peek());
+    }
+
+    @Test
+    public void testPriorityQueueCase2() {
+        HeapPriorityQueue heapPriorityQueue = new HeapPriorityQueue(Comparator.reverseOrder());
+        heapPriorityQueue.add(15.0);
+        heapPriorityQueue.add(5.0);
+        heapPriorityQueue.add(8.0);
+        heapPriorityQueue.add(10.0);
+        assertEquals(15, heapPriorityQueue.peek());
+        heapPriorityQueue.remove();
+        assertEquals(10, heapPriorityQueue.peek());
+    }
+
+    @Test
+    public void testPriorityQueueCase3() {
+        HeapPriorityQueue heapPriorityQueue1 = new HeapPriorityQueue();
+        heapPriorityQueue1.add(Double.NaN);
+        assertTrue(Double.isNaN(heapPriorityQueue1.peek()));
+    }
+
     /**
      * Test the add() and balance() methods of the MedianSelection class by adding elements and checking the size of the
      * min and max heaps.
      */
     @Test
-    public void testAddAndBalance() {
+    public void testAddAndBalanceForMedianSelection() {
         MedianSelection medianSelection = new MedianSelection();
         medianSelection.add(5.0);
         medianSelection.add(10.0);
@@ -91,9 +148,9 @@ class MedianSelectionTest {
      */
     @Test
     public void testGetMedianCase2() {
-        MedianSelection ms = new MedianSelection();
-        ms.add(Double.NaN);
-        assertTrue(Double.isNaN(ms.getMedian()));
+        MedianSelection medianSelection= new MedianSelection();
+        medianSelection.add(Double.NaN);
+        assertTrue(Double.isNaN(medianSelection.getMedian()));
     }
 
     /**
